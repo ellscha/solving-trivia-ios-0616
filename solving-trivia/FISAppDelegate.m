@@ -6,66 +6,99 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self solveTrivia];
+    
     return YES;
 }
 -(NSString *)solveTrivia {
-    NSDictionary *statesAndCapitals = @{@"Alabama" : @"Montgomery",
-                                        @"Alaska" : @"Juneau",
-                                        @"Arizona" : @"Phoenix",
-                                        @"Arkansas" : @"Little Rock",
-                                        @"California" : @"Sacramento",
-                                        @"Colorado" : @"Denver",
-                                        @"Connecticut" : @"Hartford",
-                                        @"Delaware" : @"Dover",
-                                        @"Florida" : @"Tallahassee",
-                                        @"Georgia" : @"Atlanta",
-                                        @"Hawaii" : @"Honolulu",
-                                        @"Idaho" : @"Boise",
-                                        @"Illinois" : @"Springfield",
-                                        @"Indiana" : @"Indianapolis",
-                                        @"Iowa" : @"Des Moines",
-                                        @"Kansas" : @"Topeka",
-                                        @"Kentucky" : @"Frankfort",
-                                        @"Louisiana" : @"Baton Rouge",
-                                        @"Maine" : @"Augusta",
-                                        @"Maryland" : @"Annapolis",
-                                        @"Massachuesetts" : @"Boston",
-                                        @"Michigan" : @"Lansing",
-                                        @"Minnesota" : @"St. Paul",
-                                        @"Mississippi" : @"Jackson",
-                                        @"Missouri" : @"Jefferson City",
-                                        @"Montana" : @"Helena",
-                                        @"Nebraska" : @"Lincoln",
-                                        @"Nevada" : @"Carson City",
-                                        @"New Hampshire" : @"Concord",
-                                        @"New Jersey" : @"Trenton",
-                                        @"New Mexico" : @"Santa Fe",
-                                        @"New York" : @"Albany",
-                                        @"North Carolina" : @"Raleigh",
-                                        @"North Dakota" : @"Bismarck",
-                                        @"Ohio" : @"Columbus",
-                                        @"Oklahoma" : @"Oklahoma City",
-                                        @"Oregon" : @"Salem",
-                                        @"Pennsylvania" : @"Harrisburg",
-                                        @"Rhode Island" : @"Providence",
-                                        @"South Carolina" : @"Columbia",
-                                        @"South Dakota" : @"Pierre",
-                                        @"Tennessee" : @"Nashville",
-                                        @"Texas" : @"Austin",
-                                        @"Utah" : @"Salt Lake City",
-                                        @"Vermont" : @"Montpelier",
-                                        @"Virginia" : @"Richmond",
-                                        @"Washington" : @"Olympia",
-                                        @"West Virginia" : @"Charleston",
-                                        @"Wisconsin" : @"Madison",
-                                        @"Wyoming" : @"Cheyenne"};
+    NSString *returnState;
+    NSDictionary *statesAndCapitals =
+    @{@"ALABAMA" : @"MONTGOMERY",
+      @"ALASKA" : @"JUNEAU",
+      @"ARIZONA" : @"PHOENIX",
+      @"ARKANSAS" : @"LITTLE ROCK",
+      @"CALIFORNIA" : @"SACRAMENTO",
+      @"COLORADO" : @"DENVER",
+      @"CONNECTICUT" : @"HARTFORD",
+      @"DELAWARE" : @"DOVER",
+      @"FLORIDA" : @"TALLAHASSEE",
+      @"GEORGIA" : @"ATLANTA",
+      @"HAWAII" : @"HONOLULU",
+      @"IDAHO" : @"BOISE",
+      @"ILLINOIS" : @"SPRINGFIELD",
+      @"INDIANA" : @"INDIANAPOLIS",
+      @"IOWA" : @"DES MOINES",
+      @"KANSAS" : @"TOPEKA",
+      @"KENTUCKY" : @"FRANKFORT",
+      @"LOUISIANA" : @"BATON ROUGE",
+      @"MAINE" : @"AUGUSTA",
+      @"MARYLAND" : @"ANNAPOLIS",
+      @"MASSACHUESETTS" : @"BOSTON",
+      @"MICHIGAN" : @"LANSING",
+      @"MINNESOTA" : @"ST. PAUL",
+      @"MISSISSIPPI" : @"JACKSON",
+      @"MISSOURI" : @"JEFFERSON CITY",
+      @"MONTANA" : @"HELENA",
+      @"NEBRASKA" : @"LINCOLN",
+      @"NEVADA" : @"CARSON CITY",
+      @"NEW HAMPSHIRE" : @"CONCORD",
+      @"NEW JERSEY" : @"TRENTON",
+      @"NEW MEXICO" : @"SANTA FE",
+      @"NEW YORK" : @"ALBANY",
+      @"NORTH CAROLINA" : @"RALEIGH",
+      @"NORTH DAKOTA" : @"BISMARCK",
+      @"OHIO" : @"COLUMBUS",
+      @"OKLAHOMA" : @"OKLAHOMA CITY",
+      @"OREGON" : @"SALEM",
+      @"PENNSYLVANIA" : @"HARRISBURG",
+      @"RHODE ISLAND" : @"PROVIDENCE",
+      @"SOUTH CAROLINA" : @"COLUMBIA",
+      @"SOUTH DAKOTA" : @"PIERRE",
+      @"TENNESSEE" : @"NASHVILLE",
+      @"TEXAS" : @"AUSTIN",
+      @"UTAH" : @"SALT LAKE CITY",
+      @"VERMONT" : @"MONTPELIER",
+      @"VIRGINIA" : @"RICHMOND",
+      @"WASHINGTON" : @"OLYMPIA",
+      @"WEST VIRGINIA" : @"CHARLESTON",
+      @"WISCONSIN" : @"MADISON",
+      @"WYOMING" : @"CHEYENNE"};
     
+    for (NSString *state in statesAndCapitals) {
+        NSMutableArray *stateStrings = [NSMutableArray new];
+        NSMutableArray *capitalStrings = [NSMutableArray new];
+        
+        for (NSUInteger i = 0; i<[state length]; i++) {
+            
+            [stateStrings addObject:[NSString stringWithFormat:@"%C", [state characterAtIndex:i]]];
+            [stateStrings removeObject:@" "];
+        }
+        for (NSUInteger i = 0; i < [statesAndCapitals[state] length]; i++) {
+            
+            [capitalStrings addObject:[NSString stringWithFormat:@"%C", [statesAndCapitals[state] characterAtIndex:i]]];
+            [capitalStrings removeObject:@" "];
+        }
+        NSLog(@"%@ and capitals: %@", stateStrings, capitalStrings);
+        NSUInteger rightAnswerEqualsZero = 0;
+        for (NSUInteger i = 0; i < [stateStrings count]; i++) {
+            for (NSUInteger j = 0; j < [capitalStrings count]; j++) {
+                NSLog(@"%@ and capital's letter %@", stateStrings[i], capitalStrings[j]);
+                if ([stateStrings[i] isEqualToString:capitalStrings[j]]) {
+                    rightAnswerEqualsZero++;
+                    NSLog(@"Right Answer is %lu", rightAnswerEqualsZero);
+                    NSLog(@"%@ with the count at %lu", state, rightAnswerEqualsZero); }
+            }
+        }
+        if (rightAnswerEqualsZero == 0) {
+            returnState = state.capitalizedString;
+            NSLog(@"tje state is  %@", state);
+        }
+    }
+    return returnState;
     
 }
-/*
 
-Write your method here
 
-*/
 
 @end
